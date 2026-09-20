@@ -16,6 +16,7 @@ wins = {
 
 # ----- GRAPHICAL USER INTERFACE -----
 class RockPaperScissors:
+    # Tkinter initialization: creates window and other widgets
     def __init__(self):
         self.window = tk.Tk()
         self.create_user_interface()
@@ -27,6 +28,7 @@ class RockPaperScissors:
         self.message = tk.Label(self.window, text="Your Input:")
         self.message.pack()
 
+        # --- Creates a frame for the buttons ---
         self.buttons_frame = tk.Frame(self.window)
 
         self.rock_button = tk.Button(self.buttons_frame, text="Rock")
@@ -77,6 +79,7 @@ class RockPaperScissors:
 
         self.window.mainloop()
 
+# ----- Runs the program -----
 if __name__ == "__main__":
     game = RockPaperScissors()
     game.run()
