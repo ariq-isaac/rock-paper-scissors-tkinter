@@ -9,9 +9,9 @@ def get_computer_choice():
     return random.choice(choices)
 
 wins = {
-    "rock": "paper",
-    "paper": "scissors",
-    "scissors": "rock"
+    "rock": "scissors",
+    "paper": "rock",
+    "scissors": "paper"
 }
 
 # ----- GRAPHICAL USER INTERFACE -----
@@ -53,19 +53,19 @@ class RockPaperScissors:
     def on_click(self, event):
 
         # Runs get_computer_choice() and name is as computer_choice
-        self.computer_choice = get_computer_choice()
+        computer_choice = get_computer_choice()
 
         # Gets the text of the button and name is as human_choice
-        self.button = event.widget
-        self.human_choice = self.button.cget("text").lower()
+        button = event.widget
+        human_choice = button.cget("text").lower()
 
         # Runs conditional checking to identify the winner
-        if self.human_choice == self.computer_choice:
+        if human_choice == computer_choice:
             output = "It's a draw!"
-        elif wins[self.human_choice] == self.computer_choice:
-            output = f"You Won!\nYou: {self.human_choice.capitalize()}, Computer: {self.computer_choice.capitalize()}"
+        elif wins[human_choice] == computer_choice:
+            output = f"You Won!\nYou: {human_choice.capitalize()}, Computer: {computer_choice.capitalize()}"
         else:
-            output = f"You Lost!\nYou: {self.human_choice.capitalize()}, Computer: {self.computer_choice.capitalize()}"
+            output = f"You Lost!\nYou: {human_choice.capitalize()}, Computer: {computer_choice.capitalize()}"
 
         self.round_result.config(text=output)
 
