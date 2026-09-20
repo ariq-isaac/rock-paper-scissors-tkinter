@@ -15,24 +15,19 @@ wins = {
 }
 
 # ----- GRAPHICAL USER INTERFACE -----
-
-# Initialize tkinter widgets
-class Widgets:
+class RockPaperScissors:
     def __init__(self):
         self.window = tk.Tk()
+        self.create_user_interface()
 
+    def create_user_interface(self):
         self.window.title("Rock Paper Scissors")
         self.window.geometry("300x200")
 
         self.message = tk.Label(self.window, text="Your Input:")
         self.message.pack()
 
-widgets = Widgets()
-
-#Initialize the button declaration
-class Buttons:
-    def __init__(self):
-        self.buttons_frame = tk.Frame(widgets.window)
+        self.buttons_frame = tk.Frame(self.window)
 
         self.rock_button = tk.Button(self.buttons_frame, text="Rock")
         self.rock_button.grid(row=0, column=0, padx=10, pady=10)
@@ -44,27 +39,19 @@ class Buttons:
         self.scissors_button.grid(row=0, column=2, padx=10, pady=10)
 
         # Packs button_frame
-        self.buttons_frame.pack()
+        self.buttons_frame.pack()    
 
-buttons = Buttons()
-
-# Creates a frame and message to display the result to the user
-class GameResult:
-    def __init__(self):
         #---Creates the frame for the result---
-        self.result_frame = tk.Frame(widgets.window)
-    
+        self.result_frame = tk.Frame(self.window)
+                    
         # Creates an empty label to be asigned later
         self.round_result = tk.Label(self.result_frame)
         self.round_result.pack()
-    
-        self.result_frame.pack()
+                    
+        self.result_frame.pack() 
 
-game_result = GameResult()
+    def on_click(self, event):
 
-# Creates an event for a button click
-class WidgetEvents:
-    def __init__(self, event):
         # Runs get_computer_choice() and name is as computer_choice
         self.computer_choice = get_computer_choice()
 
@@ -80,13 +67,16 @@ class WidgetEvents:
         else:
             output = f"You Lost!\nYou: {self.human_choice.capitalize()}, Computer: {self.computer_choice.capitalize()}"
 
-        game_result.round_result.config(text=output)
+        self.round_result.config(text=output)
 
-# Listens for event to the buttons
-buttons.rock_button.bind("<Button-1>", WidgetEvents)
-buttons.paper_button.bind("<Button-1>", WidgetEvents)
-buttons.scissors_button.bind("<Button-1>", WidgetEvents)
+    def run(self):
+        # Listens for event to the buttons
+        self.rock_button.bind("<Button-1>", self.on_click)
+        self.paper_button.bind("<Button-1>", self.on_click)
+        self.scissors_button.bind("<Button-1>", self.on_click)
 
-# Runs the window
+        self.window.mainloop()
+
 if __name__ == "__main__":
-    widgets.window.mainloop()
+    game = RockPaperScissors()
+    game.run()
