@@ -14,6 +14,14 @@ wins = {
     "scissors": "paper"
 }
 
+def get_result(human_choice, computer_choice):
+    if human_choice == computer_choice:
+        return "It's a draw!"
+    elif wins[human_choice] == computer_choice:
+        return f"You Won!\nYou: {human_choice.capitalize()}, Computer: {computer_choice.capitalize()}"
+    else:
+        return f"You Lost!\nYou: {human_choice.capitalize()}, Computer: {computer_choice.capitalize()}"
+
 # ----- GRAPHICAL USER INTERFACE -----
 class RockPaperScissors:
     # Tkinter initialization: creates window and other widgets
@@ -55,19 +63,14 @@ class RockPaperScissors:
     def on_click(self, event):
 
         # Runs get_computer_choice() and name is as computer_choice
-        computer_choice = get_computer_choice()
+        computer = get_computer_choice()
 
         # Gets the text of the button and name is as human_choice
         button = event.widget
-        human_choice = button.cget("text").lower()
+        human = button.cget("text").lower()
 
         # Runs conditional checking to identify the winner
-        if human_choice == computer_choice:
-            output = "It's a draw!"
-        elif wins[human_choice] == computer_choice:
-            output = f"You Won!\nYou: {human_choice.capitalize()}, Computer: {computer_choice.capitalize()}"
-        else:
-            output = f"You Lost!\nYou: {human_choice.capitalize()}, Computer: {computer_choice.capitalize()}"
+        output = get_result(human, computer)
 
         self.round_result.config(text=output)
 
